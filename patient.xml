@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Process>
+<!--    <event id="01" target="02" source="00" type="star_event" name="Start_Event"></event>-->
+    <connector id="02" target="03" source="01" type="connector" name="connecteur"></connector>
+    <task id="03" target="04" source="02" name="identification" type="view"></task>
+    <connector id="04" target="05" source="03" type="connector" name="connecteur_1"></connector>
+    <task id="05" target="06" source="04" name="api_3A" type="api" url="http://localhost" pfad="/api/v1/identification" port="8080"></task>
+    <connector id="06" target="07" source="05" type="connector" name="connecteur_2"></connector>
+    <gateways id="07" target="08" source="06" name="verification_presence_patient" type="conditional_start"></gateways>
+    <connector id="08" target="09" source="07" type="connector" name="connecteur_3"></connector>
+    <task id="09" target="10" source="08" name="datapicker_view" type="view"></task>
+    <connector id="10" target="11" source="09" type="connector" name="connecteur_4"></connector>
+    <task id="11" target="12" source="10" name="api_7A" type="api" url="http://localhost" pfad="/api/v1/verification_date" port="8080"></task>
+    <connector id="12" target="13" source="11" type="connector" name="connecteur_5"></connector>
+    <gateways id="13" target="14" source="12" name="date_verification" type="conditional_end"></gateways>
+    <connector id="14" target="15" source="13" type="connector" name="connecteur_6"></connector>
+    <task id="15" target="16" source="14" name="confirmation_rende_vous" type="view"></task>
+    <connector id="16" target="17" source="15" type="connector" name="connecteur_7"></connector>
+    <task id="17" target="18" source="16" name="enregistrement_rende_vous" type="api" url="http://localhost" pfad="/api/v1/Enregistrement" port="8080"></task>
+    <connector id="18" target="19" source="17" type="connector" name="connecteur_8"></connector>
+    <event id="19" source="18" type="end_event" name="End_Event"></event>
+</Process>
